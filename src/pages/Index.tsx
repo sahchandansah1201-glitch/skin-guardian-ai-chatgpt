@@ -1,16 +1,59 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Header from "@/components/landing/Header";
+import Hero from "@/components/landing/Hero";
+import HowItWorks from "@/components/landing/HowItWorks";
+import WhenToUse from "@/components/landing/WhenToUse";
+import SafetyLimitations from "@/components/landing/SafetyLimitations";
+import DoctorsTrust from "@/components/landing/DoctorsTrust";
+import PrivacySection from "@/components/landing/PrivacySection";
+import LeadCapture from "@/components/landing/LeadCapture";
+import PhotoGuide from "@/components/landing/PhotoGuide";
+import FAQSection from "@/components/landing/FAQSection";
+import FinalCTA from "@/components/landing/FinalCTA";
+import StickyMobileCTA from "@/components/landing/StickyMobileCTA";
+import Footer from "@/components/landing/Footer";
+import { useEffect } from "react";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
-  return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
-  );
+const trackScroll = () => {
+  let fired50 = false;
+  let fired90 = false;
+  const handler = () => {
+    const pct = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+    if (pct > 0.5 && !fired50) {
+      fired50 = true;
+      (window as any).gtag?.("event", "scroll_50");
+    }
+    if (pct > 0.9 && !fired90) {
+      fired90 = true;
+      (window as any).gtag?.("event", "scroll_90");
+    }
+  };
+  window.addEventListener("scroll", handler, { passive: true });
+  return () => window.removeEventListener("scroll", handler);
 };
 
-const Index = PlaceholderIndex;
+export default function Index() {
+  useEffect(() => {
+    (window as any).gtag?.("event", "view_hero");
+    return trackScroll();
+  }, []);
 
-export default Index;
+  return (
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <HowItWorks />
+        <PhotoGuide />
+        <WhenToUse />
+        <SafetyLimitations />
+        <DoctorsTrust />
+        <PrivacySection />
+        <LeadCapture />
+        <FAQSection />
+        <FinalCTA />
+      </main>
+      <Footer />
+      <StickyMobileCTA />
+    </>
+  );
+}
