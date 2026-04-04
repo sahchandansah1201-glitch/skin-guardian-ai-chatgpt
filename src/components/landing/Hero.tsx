@@ -1,7 +1,7 @@
 import { ShieldCheck, Lock, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import heroIllustration from "@/assets/hero-illustration.jpg";
+import heroIllustration from "@/assets/hero-illustration-light.jpg";
 
 const trackEvent = (name: string) => {
   if (typeof window !== "undefined" && (window as any).gtag) {
