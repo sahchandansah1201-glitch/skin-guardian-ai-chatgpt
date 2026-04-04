@@ -52,13 +52,12 @@ export default function Header() {
         </button>
       </div>
 
-      {open && createPortal(
+      {open && (
         <div
-          className="fixed inset-0 top-16 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 top-16 z-[49] bg-black/50 backdrop-blur-sm md:hidden"
           onClick={() => setOpen(false)}
           aria-hidden="true"
-        />,
-        document.body
+        />
       )}
 
       {open && (
