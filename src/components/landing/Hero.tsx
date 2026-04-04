@@ -26,7 +26,7 @@ export default function Hero() {
       <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-secondary/10 blur-[120px]" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[100px]" />
 
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
+      <div className="container mx-auto px-4 md:px-8 relative z-10 flex-1 flex items-center">
         <div className="max-w-3xl">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +77,7 @@ export default function Hero() {
       </div>
 
       {/* Disclaimer */}
-      <div className="absolute bottom-16 md:bottom-4 left-0 right-0 text-center">
+      <div className="relative z-10 text-center mt-auto pt-6">
         <p className="text-xs text-muted-foreground/60 px-4">
           SkinDoctor не является диагнозом и не заменяет консультацию врача. При сомнениях обратитесь к дерматологу.
         </p>
