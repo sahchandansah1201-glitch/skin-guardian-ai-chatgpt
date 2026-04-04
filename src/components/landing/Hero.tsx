@@ -77,7 +77,7 @@ export default function Hero() {
       </div>
 
       {/* Disclaimer */}
-      <div className="absolute bottom-4 left-0 right-0 text-center">
+      <div className="absolute bottom-16 md:bottom-4 left-0 right-0 text-center">
         <p className="text-xs text-muted-foreground/60 px-4">
           SkinDoctor не является диагнозом и не заменяет консультацию врача. При сомнениях обратитесь к дерматологу.
         </p>
