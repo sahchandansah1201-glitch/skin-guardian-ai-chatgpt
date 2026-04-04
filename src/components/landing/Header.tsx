@@ -53,18 +53,25 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="md:hidden glass border-t border-border px-4 pb-4">
-          <nav className="flex flex-col gap-3 pt-3" aria-label="Мобильное меню">
-            {navLinks.map((l) => (
-              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-sm font-medium text-foreground/80 py-2">
-                {l.label}
-              </a>
-            ))}
-            <Button size="sm" className="mt-2" asChild>
-              <a href="#booking" onClick={() => { trackEvent("click_book_primary"); setOpen(false); }}>Записаться на приём</a>
-            </Button>
-          </nav>
-        </div>
+        <>
+          <div
+            className="fixed inset-0 top-16 z-40 bg-foreground/50 backdrop-blur-sm md:hidden"
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="relative z-50 md:hidden glass border-t border-border px-4 pb-4">
+            <nav className="flex flex-col gap-3 pt-3" aria-label="Мобильное меню">
+              {navLinks.map((l) => (
+                <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-sm font-medium text-foreground/80 py-2">
+                  {l.label}
+                </a>
+              ))}
+              <Button size="sm" className="mt-2" asChild>
+                <a href="#booking" onClick={() => { trackEvent("click_book_primary"); setOpen(false); }}>Записаться на приём</a>
+              </Button>
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );
