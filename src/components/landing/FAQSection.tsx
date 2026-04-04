@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import ScrollReveal from "./ScrollReveal";
 
 const faqs = [
   {
@@ -58,31 +59,35 @@ export default function FAQSection() {
   return (
     <section id="faq" className="section-padding" aria-labelledby="faq-title">
       <div className="container mx-auto max-w-3xl">
-        <div className="text-center mb-12">
-          <h2 id="faq-title" className="font-display text-3xl md:text-4xl font-800 text-foreground">
-            Частые вопросы
-          </h2>
-          <p className="mt-4 text-muted-foreground text-lg">
-            Ответы на главные вопросы о SkinDoctor
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-12">
+            <h2 id="faq-title" className="font-display text-3xl md:text-4xl font-800 text-foreground">
+              Частые вопросы
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              Ответы на главные вопросы о SkinDoctor
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <Accordion type="multiple" className="space-y-3" onValueChange={() => trackEvent("open_faq")}>
-          {faqs.map((faq, i) => (
-            <AccordionItem
-              key={i}
-              value={`faq-${i}`}
-              className="bg-card rounded-xl border border-border px-6 shadow-soft"
-            >
-              <AccordionTrigger className="text-left font-medium text-foreground hover:no-underline py-5">
-                {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground pb-5 leading-relaxed">
-                {faq.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <ScrollReveal delay={0.1}>
+          <Accordion type="multiple" className="space-y-3" onValueChange={() => trackEvent("open_faq")}>
+            {faqs.map((faq, i) => (
+              <AccordionItem
+                key={i}
+                value={`faq-${i}`}
+                className="bg-card rounded-xl border border-border px-6 shadow-soft"
+              >
+                <AccordionTrigger className="text-left font-medium text-foreground hover:no-underline py-5">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground pb-5 leading-relaxed">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </ScrollReveal>
       </div>
     </section>
   );
