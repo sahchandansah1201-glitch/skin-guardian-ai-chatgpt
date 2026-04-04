@@ -18,7 +18,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] flex items-center overflow-hidden pt-16"
+      className="relative min-h-[90vh] flex flex-col overflow-hidden pt-16 pb-20 md:pb-8"
       aria-label="Главный экран"
     >
       {/* Background gradient */}
