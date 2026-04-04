@@ -53,7 +53,6 @@ export default function Header() {
         </button>
       </div>
 
-      {open && (
       {open && createPortal(
         <div
           className="fixed inset-0 top-16 z-40 bg-black/50 backdrop-blur-sm md:hidden"
