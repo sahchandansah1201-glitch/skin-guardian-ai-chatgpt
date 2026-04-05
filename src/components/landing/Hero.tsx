@@ -56,7 +56,7 @@ export default function Hero() {
               className="mt-8 flex flex-col sm:flex-row gap-4"
             >
               <Button size="lg" className="text-base px-8 py-6 rounded-xl shadow-elevated" asChild>
-                <a href="#booking" onClick={() => trackEvent("click_book_primary")}>Записаться на приём</a>
+                <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_book_primary")}>Проверить родинку</a>
               </Button>
               <Button size="lg" variant="outline" className="text-base px-8 py-6 rounded-xl" asChild>
                 <a href="#lead" onClick={() => trackEvent("click_lead_secondary")}>Получить чек‑лист и напоминания</a>
