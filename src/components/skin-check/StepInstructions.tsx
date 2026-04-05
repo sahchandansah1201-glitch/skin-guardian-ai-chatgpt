@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Camera, Sun, Ruler, Focus, ArrowRight } from "lucide-react";
+import { Camera, Sun, Focus, ArrowRight } from "lucide-react";
 
 const tips = [
   {
@@ -11,11 +11,6 @@ const tips = [
     icon: Focus,
     title: "Фокус на родинке",
     desc: "Расстояние 10–15 см, родинка в центре кадра",
-  },
-  {
-    icon: Ruler,
-    title: "Масштаб",
-    desc: "Положите линейку или монету рядом для масштаба",
   },
   {
     icon: Camera,
