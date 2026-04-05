@@ -14,7 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      skin_checks: {
+        Row: {
+          ai_result: Json | null
+          contact_info: string
+          contact_type: string
+          created_at: string
+          id: string
+          photo_path: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          ai_result?: Json | null
+          contact_info: string
+          contact_type: string
+          created_at?: string
+          id?: string
+          photo_path?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          ai_result?: Json | null
+          contact_info?: string
+          contact_type?: string
+          created_at?: string
+          id?: string
+          photo_path?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
