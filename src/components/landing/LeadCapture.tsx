@@ -52,7 +52,7 @@ export default function LeadCapture() {
             <p className="text-muted-foreground mb-8">Чек‑лист и напоминания отправлены. Что дальше?</p>
             <div className="flex flex-col gap-3">
               <Button size="lg" className="rounded-xl" asChild>
-                <a href="#booking">Записаться на приём</a>
+                <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer">Проверить родинку</a>
               </Button>
               <Button size="lg" variant="outline" className="rounded-xl" asChild>
                 <a href="#photo-guide">Как правильно сфотографировать</a>
