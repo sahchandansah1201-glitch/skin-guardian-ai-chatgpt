@@ -61,7 +61,7 @@ export default function Hero() {
                 Проверить родинку
               </Button>
               <Button size="lg" variant="outline" className="text-base px-8 py-6 rounded-xl" asChild>
-                <a href="#lead" onClick={() => trackEvent("click_lead_secondary")}>Получить чек‑лист и напоминания</a>
+                <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_telegram_hero")}>Проверить в Телеграм</a>
               </Button>
             </motion.div>
 
