@@ -2,6 +2,7 @@ import { ShieldCheck, Lock, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import heroIllustration from "@/assets/hero-illustration-light.jpg";
+import { useSkinCheck } from "@/components/skin-check/SkinCheckContext";
 
 const trackEvent = (name: string) => {
   if (typeof window !== "undefined" && (window as any).gtag) {
@@ -16,6 +17,7 @@ const trustBullets = [
 ];
 
 export default function Hero() {
+  const { open } = useSkinCheck();
   return (
     <section
       id="hero"
@@ -55,8 +57,8 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="mt-8 flex flex-col sm:flex-row gap-4"
             >
-              <Button size="lg" className="text-base px-8 py-6 rounded-xl shadow-elevated" asChild>
-                <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_book_primary")}>Проверить родинку</a>
+              <Button size="lg" className="text-base px-8 py-6 rounded-xl shadow-elevated" onClick={() => { trackEvent("click_book_primary"); open(); }}>
+                Проверить родинку
               </Button>
               <Button size="lg" variant="outline" className="text-base px-8 py-6 rounded-xl" asChild>
                 <a href="#lead" onClick={() => trackEvent("click_lead_secondary")}>Получить чек‑лист и напоминания</a>

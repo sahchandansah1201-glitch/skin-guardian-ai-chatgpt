@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import { useSkinCheck } from "@/components/skin-check/SkinCheckContext";
 
 const trackEvent = (name: string) => {
   if (typeof window !== "undefined" && (window as any).gtag) {
@@ -9,6 +10,8 @@ const trackEvent = (name: string) => {
 };
 
 export default function FinalCTA() {
+  const { open } = useSkinCheck();
+
   return (
     <section id="booking" className="section-padding bg-hero-gradient" aria-labelledby="booking-title">
       <ScrollReveal>
@@ -17,18 +20,11 @@ export default function FinalCTA() {
             Проверить родинку
           </h2>
           <p className="text-muted-foreground mb-8">
-            Быстро и без лишних шагов — отправьте фото боту в Telegram
+            Загрузите фото прямо на сайте — AI проанализирует и даст предварительную оценку
           </p>
-          <Button size="lg" className="w-full max-w-sm rounded-xl text-base h-14" asChild>
-            <a
-              href="https://t.me/Skin_Doctor_bot"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent("click_final_cta")}
-            >
-              <MessageCircle size={20} className="mr-2" />
-              Проверить родинку
-            </a>
+          <Button size="lg" className="w-full max-w-sm rounded-xl text-base h-14" onClick={() => { trackEvent("click_final_cta"); open(); }}>
+            <MessageCircle size={20} className="mr-2" />
+            Проверить родинку
           </Button>
         </div>
       </ScrollReveal>
