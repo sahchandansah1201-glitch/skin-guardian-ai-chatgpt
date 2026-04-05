@@ -31,8 +31,8 @@ export default function FinalCTA() {
                 <h2 className="font-display text-2xl font-800 text-foreground mb-2">Заявка отправлена!</h2>
                 <p className="text-muted-foreground mb-6">Мы свяжемся с вами для подтверждения записи.</p>
                 <Button variant="outline" className="rounded-xl" asChild>
-                  <a href="https://t.me/" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_messenger")}>
-                    <MessageCircle size={16} className="mr-2" /> Написать в мессенджер
+                  <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_messenger")}>
+                    <MessageCircle size={16} className="mr-2" /> Написать @Skin_Doctor_bot
                   </a>
                 </Button>
               </div>
@@ -84,7 +84,7 @@ export default function FinalCTA() {
 
                 <div className="mt-4 text-center">
                   <a
-                    href="https://t.me/"
+                    href="https://t.me/Skin_Doctor_bot"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
