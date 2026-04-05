@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSkinCheck } from "@/components/skin-check/SkinCheckContext";
 
 const navLinks = [
   { href: "#how-it-works", label: "Как работает" },
@@ -42,6 +43,7 @@ const itemVariants = {
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { open: openCheck } = useSkinCheck();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass shadow-soft">
@@ -62,8 +64,8 @@ export default function Header() {
           <Button variant="outline" size="sm" asChild>
             <a href="#lead" onClick={() => trackEvent("click_lead_secondary")}>Чек‑лист</a>
           </Button>
-          <Button size="sm" asChild>
-            <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_book_primary")}>Проверить родинку</a>
+          <Button size="sm" onClick={() => { trackEvent("click_book_primary"); openCheck(); }}>
+            Проверить родинку
           </Button>
         </div>
 
@@ -126,8 +128,8 @@ export default function Header() {
                 </motion.a>
               ))}
               <motion.div variants={itemVariants}>
-                <Button size="sm" className="mt-2 w-full" asChild>
-                  <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" onClick={() => { trackEvent("click_book_primary"); setOpen(false); }}>Проверить родинку</a>
+                <Button size="sm" className="mt-2 w-full" onClick={() => { trackEvent("click_book_primary"); setOpen(false); openCheck(); }}>
+                  Проверить родинку
                 </Button>
               </motion.div>
             </nav>
