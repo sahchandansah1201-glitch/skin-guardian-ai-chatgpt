@@ -58,7 +58,7 @@ export default function LeadCapture() {
                 <a href="#photo-guide">Как правильно сфотографировать</a>
               </Button>
               <Button size="lg" variant="outline" className="rounded-xl" asChild>
-                <a href="https://t.me/" target="_blank" rel="noopener noreferrer">Подписаться на Telegram‑канал</a>
+                <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer">Написать @Skin_Doctor_bot</a>
               </Button>
             </div>
           </div>
