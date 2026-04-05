@@ -63,7 +63,7 @@ export default function Header() {
             <a href="#lead" onClick={() => trackEvent("click_lead_secondary")}>Чек‑лист</a>
           </Button>
           <Button size="sm" asChild>
-            <a href="#booking" onClick={() => trackEvent("click_book_primary")}>Записаться</a>
+            <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_book_primary")}>Проверить родинку</a>
           </Button>
         </div>
 
@@ -127,7 +127,7 @@ export default function Header() {
               ))}
               <motion.div variants={itemVariants}>
                 <Button size="sm" className="mt-2 w-full" asChild>
-                  <a href="#booking" onClick={() => { trackEvent("click_book_primary"); setOpen(false); }}>Записаться на приём</a>
+                  <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" onClick={() => { trackEvent("click_book_primary"); setOpen(false); }}>Проверить родинку</a>
                 </Button>
               </motion.div>
             </nav>

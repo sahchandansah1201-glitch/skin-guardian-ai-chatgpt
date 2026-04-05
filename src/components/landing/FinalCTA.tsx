@@ -39,7 +39,7 @@ export default function FinalCTA() {
             ) : (
               <>
                 <h2 id="booking-title" className="font-display text-2xl md:text-3xl font-800 text-foreground text-center mb-2">
-                  Записаться на приём
+                   Проверить родинку
                 </h2>
                 <p className="text-center text-muted-foreground mb-8">
                   Быстро и без лишних шагов
@@ -78,7 +78,7 @@ export default function FinalCTA() {
                     className="w-full rounded-xl"
                     onClick={() => trackEvent("start_form_booking")}
                   >
-                    Записаться на приём
+                    Проверить родинку
                   </Button>
                 </form>
 

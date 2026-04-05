@@ -39,7 +39,7 @@ export default function WhenToUse() {
         <ScrollReveal delay={0.3}>
           <div className="text-center mt-10">
             <Button size="lg" className="rounded-xl px-8 py-6 text-base shadow-elevated" asChild>
-              <a href="#booking">Записаться на приём</a>
+              <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer">Проверить родинку</a>
             </Button>
           </div>
         </ScrollReveal>

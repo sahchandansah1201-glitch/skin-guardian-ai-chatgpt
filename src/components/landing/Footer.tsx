@@ -16,7 +16,7 @@ export default function Footer() {
               <a href="#how-it-works" className="hover:text-primary-foreground transition-colors">Как работает</a>
               <a href="#doctors" className="hover:text-primary-foreground transition-colors">Врачи</a>
               <a href="#faq" className="hover:text-primary-foreground transition-colors">FAQ</a>
-              <a href="#booking" className="hover:text-primary-foreground transition-colors">Записаться</a>
+              <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground transition-colors">Проверить родинку</a>
             </nav>
           </div>
 
