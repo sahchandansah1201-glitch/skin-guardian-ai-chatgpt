@@ -102,17 +102,27 @@ export default function SkinCheckModal() {
           </div>
         )}
 
-        {step === "contact" && <StepContact onSubmit={handleContactSubmit} />}
-        {step === "instructions" && <StepInstructions onNext={handleInstructionsDone} />}
-        {step === "upload" && contact && (
-          <StepUpload contact={contact} onUploaded={handleUploadDone} />
-        )}
-        {step === "processing" && checkId && (
-          <StepProcessing checkId={checkId} onDone={handleAnalysisDone} />
-        )}
-        {step === "result" && result && (
-          <StepResult result={result} onClose={handleClose} onRetry={() => setStep("upload")} />
-        )}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            {step === "contact" && <StepContact onSubmit={handleContactSubmit} />}
+            {step === "instructions" && <StepInstructions onNext={handleInstructionsDone} />}
+            {step === "upload" && contact && (
+              <StepUpload contact={contact} onUploaded={handleUploadDone} />
+            )}
+            {step === "processing" && checkId && (
+              <StepProcessing checkId={checkId} onDone={handleAnalysisDone} />
+            )}
+            {step === "result" && result && (
+              <StepResult result={result} onClose={handleClose} onRetry={() => setStep("upload")} />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </DialogContent>
     </Dialog>
   );
