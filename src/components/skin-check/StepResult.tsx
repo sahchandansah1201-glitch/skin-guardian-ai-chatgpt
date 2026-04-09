@@ -91,15 +91,20 @@ export default function StepResult({
       animate="show"
     >
       {/* Risk Hero Card */}
-      <motion.div variants={item} transition={{ type: "spring", stiffness: 300, damping: 24 }}>
+      <motion.div
+        variants={item}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
         className={`relative overflow-hidden rounded-2xl border ${config.border} ${config.bg} p-5 shadow-sm ${config.glow}`}
       >
         <div className="flex items-start gap-4">
-          <div
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15, delay: 0.2 }}
             className={`flex-shrink-0 w-14 h-14 rounded-xl ${config.badgeBg} flex items-center justify-center`}
           >
             <Icon size={28} className={config.color} strokeWidth={2.2} />
-          </div>
+          </motion.div>
           <div className="flex-1 min-w-0">
             <p className={`text-lg font-bold ${config.color} leading-tight`}>
               {result.risk_label}
@@ -117,7 +122,6 @@ export default function StepResult({
           </div>
         </div>
 
-        {/* Confidence bar inside hero */}
         {result.confidence_percent > 0 && (
           <div className="mt-4 pt-3 border-t border-current/5">
             <div className="flex items-center justify-between mb-1.5">
@@ -129,83 +133,100 @@ export default function StepResult({
               </span>
             </div>
             <div className="h-2 bg-white/60 rounded-full overflow-hidden">
-              <div
-                className={`h-full ${config.barColor} rounded-full transition-all duration-1000 ease-out`}
-                style={{ width: `${result.confidence_percent}%` }}
+              <motion.div
+                className={`h-full ${config.barColor} rounded-full`}
+                initial={{ width: 0 }}
+                animate={{ width: `${result.confidence_percent}%` }}
+                transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
               />
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
 
-      {/* Detail Cards */}
-      <div className="space-y-2.5">
-        {/* Description */}
-        <div className="flex gap-3 p-3.5 rounded-xl bg-muted/40 border border-border/60">
-          <FileText size={18} className="text-muted-foreground flex-shrink-0 mt-0.5" />
-          <div>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-              Описание
-            </p>
-            <p className="text-sm text-foreground leading-relaxed">
-              {result.description}
-            </p>
-          </div>
+      {/* Description */}
+      <motion.div
+        variants={item}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="flex gap-3 p-3.5 rounded-xl bg-muted/40 border border-border/60"
+      >
+        <FileText size={18} className="text-muted-foreground flex-shrink-0 mt-0.5" />
+        <div>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+            Описание
+          </p>
+          <p className="text-sm text-foreground leading-relaxed">
+            {result.description}
+          </p>
         </div>
+      </motion.div>
 
-        {/* Recommendation */}
-        <div
-          className={`flex gap-3 p-3.5 rounded-xl border ${
+      {/* Recommendation */}
+      <motion.div
+        variants={item}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className={`flex gap-3 p-3.5 rounded-xl border ${
+          result.risk_level === "high"
+            ? "bg-red-50/50 border-red-200/60"
+            : result.risk_level === "medium"
+            ? "bg-amber-50/50 border-amber-200/60"
+            : "bg-muted/40 border-border/60"
+        }`}
+      >
+        <Stethoscope
+          size={18}
+          className={`flex-shrink-0 mt-0.5 ${
             result.risk_level === "high"
-              ? "bg-red-50/50 border-red-200/60"
+              ? "text-red-500"
               : result.risk_level === "medium"
-              ? "bg-amber-50/50 border-amber-200/60"
-              : "bg-muted/40 border-border/60"
+              ? "text-amber-500"
+              : "text-muted-foreground"
           }`}
-        >
-          <Stethoscope
-            size={18}
-            className={`flex-shrink-0 mt-0.5 ${
-              result.risk_level === "high"
-                ? "text-red-500"
-                : result.risk_level === "medium"
-                ? "text-amber-500"
-                : "text-muted-foreground"
-            }`}
-          />
-          <div>
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-              Рекомендация
-            </p>
-            <p className="text-sm text-foreground leading-relaxed font-medium">
-              {result.recommendation}
-            </p>
-          </div>
+        />
+        <div>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+            Рекомендация
+          </p>
+          <p className="text-sm text-foreground leading-relaxed font-medium">
+            {result.recommendation}
+          </p>
         </div>
+      </motion.div>
 
-        {/* Next check */}
-        {result.next_check && result.next_check !== "—" && (
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/40">
-            <Clock size={16} className="text-muted-foreground flex-shrink-0" />
-            <p className="text-sm text-muted-foreground">
-              Следующая проверка:{" "}
-              <span className="font-medium text-foreground">{result.next_check}</span>
-            </p>
-          </div>
-        )}
-      </div>
+      {/* Next check */}
+      {result.next_check && result.next_check !== "—" && (
+        <motion.div
+          variants={item}
+          transition={{ type: "spring", stiffness: 300, damping: 24 }}
+          className="flex items-center gap-3 p-3 rounded-xl bg-muted/30 border border-border/40"
+        >
+          <Clock size={16} className="text-muted-foreground flex-shrink-0" />
+          <p className="text-sm text-muted-foreground">
+            Следующая проверка:{" "}
+            <span className="font-medium text-foreground">{result.next_check}</span>
+          </p>
+        </motion.div>
+      )}
 
       {/* Disclaimer */}
-      <div className="p-3 rounded-xl bg-amber-50/50 border border-amber-200/40">
+      <motion.div
+        variants={item}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="p-3 rounded-xl bg-amber-50/50 border border-amber-200/40"
+      >
         <p className="text-xs text-amber-800/80 leading-relaxed">
           <span className="font-semibold">⚠️ Важно:</span> Это предварительная AI-оценка, а не
           медицинский диагноз. При любых сомнениях обратитесь к дерматологу. Обязательно
           покажите врачу, если заметили изменения формы, цвета или размера.
         </p>
-      </div>
+      </motion.div>
 
       {/* Actions */}
-      <div className="flex flex-col gap-2 pt-1">
+      <motion.div
+        variants={item}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="flex flex-col gap-2 pt-1"
+      >
         <Button size="lg" className="w-full rounded-xl group" asChild>
           <a href="https://t.me/Skin_Doctor_bot" target="_blank" rel="noopener noreferrer">
             <MessageCircle size={16} className="mr-2" />
@@ -225,7 +246,7 @@ export default function StepResult({
             Закрыть
           </Button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
