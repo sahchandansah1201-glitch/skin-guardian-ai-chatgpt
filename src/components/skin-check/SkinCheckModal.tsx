@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { AnimatePresence, motion } from "framer-motion";
 import { useSkinCheck } from "./SkinCheckContext";
 import StepContact from "./StepContact";
 import StepInstructions from "./StepInstructions";
