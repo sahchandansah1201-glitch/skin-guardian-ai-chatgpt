@@ -91,7 +91,7 @@ export default function StepResult({
       animate="show"
     >
       {/* Risk Hero Card */}
-      <div
+      <motion.div variants={item} transition={{ type: "spring", stiffness: 300, damping: 24 }}>
         className={`relative overflow-hidden rounded-2xl border ${config.border} ${config.bg} p-5 shadow-sm ${config.glow}`}
       >
         <div className="flex items-start gap-4">
