@@ -11,6 +11,7 @@ import {
   FileText,
   ChevronRight,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import type { AnalysisResult } from "./SkinCheckModal";
 
 const riskConfig = {
