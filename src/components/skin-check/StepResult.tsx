@@ -61,6 +61,16 @@ const riskConfig = {
   },
 };
 
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
+};
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+
 export default function StepResult({
   result,
   onClose,
@@ -74,7 +84,12 @@ export default function StepResult({
   const Icon = config.icon;
 
   return (
-    <div className="space-y-4 mt-1">
+    <motion.div
+      className="space-y-4 mt-1"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
       {/* Risk Hero Card */}
       <div
         className={`relative overflow-hidden rounded-2xl border ${config.border} ${config.bg} p-5 shadow-sm ${config.glow}`}
