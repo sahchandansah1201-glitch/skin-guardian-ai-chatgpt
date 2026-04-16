@@ -135,8 +135,6 @@ export default function StepResult({
   };
 
   return (
-
-  return (
     <motion.div
       className="space-y-4 mt-1"
       variants={container}
