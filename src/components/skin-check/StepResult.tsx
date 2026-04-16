@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   ShieldCheck,
   AlertTriangle,
@@ -10,8 +12,13 @@ import {
   Stethoscope,
   FileText,
   ChevronRight,
+  Mail,
+  CheckCircle2,
+  Loader2,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import type { AnalysisResult } from "./SkinCheckModal";
 
 const riskConfig = {
@@ -82,6 +89,50 @@ export default function StepResult({
 }) {
   const config = riskConfig[result.risk_level as keyof typeof riskConfig] || riskConfig.unknown;
   const Icon = config.icon;
+  const { toast } = useToast();
+
+  const [emailOpen, setEmailOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSendEmail = async () => {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast({ title: "Введите корректный email", variant: "destructive" });
+      return;
+    }
+    setSending(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "skin-check-result",
+          recipientEmail: email,
+          idempotencyKey: `skin-result-${Date.now()}`,
+          templateData: {
+            risk_label: result.risk_label,
+            risk_level: result.risk_level,
+            object_class: result.object_class,
+            confidence_percent: result.confidence_percent,
+            description: result.description,
+            recommendation: result.recommendation,
+            next_check: result.next_check,
+          },
+        },
+      });
+      if (error) throw error;
+      setSent(true);
+      toast({ title: "Результат отправлен на " + email });
+    } catch (e: any) {
+      console.error("Email send error:", e);
+      toast({
+        title: "Не удалось отправить",
+        description: "Email-домен ещё не настроен. Обратитесь к администратору.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <motion.div
@@ -219,6 +270,62 @@ export default function StepResult({
           медицинский диагноз. При любых сомнениях обратитесь к дерматологу. Обязательно
           покажите врачу, если заметили изменения формы, цвета или размера.
         </p>
+      </motion.div>
+
+      {/* Send to Email */}
+      <motion.div
+        variants={item}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="rounded-xl border border-border/60 overflow-hidden"
+      >
+        <button
+          onClick={() => !sent && setEmailOpen(!emailOpen)}
+          className="w-full flex items-center gap-3 p-3.5 text-left hover:bg-muted/30 transition-colors"
+        >
+          {sent ? (
+            <CheckCircle2 size={18} className="text-emerald-500 flex-shrink-0" />
+          ) : (
+            <Mail size={18} className="text-muted-foreground flex-shrink-0" />
+          )}
+          <span className="text-sm font-medium text-foreground">
+            {sent ? "Результат отправлен" : "Отправить результат на email"}
+          </span>
+        </button>
+        <AnimatePresence>
+          {emailOpen && !sent && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <div className="px-3.5 pb-3.5 flex gap-2">
+                <Input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="rounded-lg text-sm"
+                  disabled={sending}
+                  onKeyDown={(e) => e.key === "Enter" && handleSendEmail()}
+                />
+                <Button
+                  size="default"
+                  className="rounded-lg shrink-0"
+                  onClick={handleSendEmail}
+                  disabled={sending}
+                >
+                  {sending ? (
+                    <Loader2 size={16} className="animate-spin" />
+                  ) : (
+                    <Mail size={16} />
+                  )}
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
       {/* Actions */}
