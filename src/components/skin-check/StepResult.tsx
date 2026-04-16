@@ -272,6 +272,62 @@ export default function StepResult({
         </p>
       </motion.div>
 
+      {/* Send to Email */}
+      <motion.div
+        variants={item}
+        transition={{ type: "spring", stiffness: 300, damping: 24 }}
+        className="rounded-xl border border-border/60 overflow-hidden"
+      >
+        <button
+          onClick={() => !sent && setEmailOpen(!emailOpen)}
+          className="w-full flex items-center gap-3 p-3.5 text-left hover:bg-muted/30 transition-colors"
+        >
+          {sent ? (
+            <CheckCircle2 size={18} className="text-emerald-500 flex-shrink-0" />
+          ) : (
+            <Mail size={18} className="text-muted-foreground flex-shrink-0" />
+          )}
+          <span className="text-sm font-medium text-foreground">
+            {sent ? "Результат отправлен" : "Отправить результат на email"}
+          </span>
+        </button>
+        <AnimatePresence>
+          {emailOpen && !sent && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <div className="px-3.5 pb-3.5 flex gap-2">
+                <Input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="rounded-lg text-sm"
+                  disabled={sending}
+                  onKeyDown={(e) => e.key === "Enter" && handleSendEmail()}
+                />
+                <Button
+                  size="default"
+                  className="rounded-lg shrink-0"
+                  onClick={handleSendEmail}
+                  disabled={sending}
+                >
+                  {sending ? (
+                    <Loader2 size={16} className="animate-spin" />
+                  ) : (
+                    <Mail size={16} />
+                  )}
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
       {/* Actions */}
       <motion.div
         variants={item}
