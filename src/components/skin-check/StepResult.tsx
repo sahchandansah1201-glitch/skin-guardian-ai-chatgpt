@@ -89,6 +89,52 @@ export default function StepResult({
 }) {
   const config = riskConfig[result.risk_level as keyof typeof riskConfig] || riskConfig.unknown;
   const Icon = config.icon;
+  const { toast } = useToast();
+
+  const [emailOpen, setEmailOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSendEmail = async () => {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast({ title: "Введите корректный email", variant: "destructive" });
+      return;
+    }
+    setSending(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-transactional-email", {
+        body: {
+          templateName: "skin-check-result",
+          recipientEmail: email,
+          idempotencyKey: `skin-result-${Date.now()}`,
+          templateData: {
+            risk_label: result.risk_label,
+            risk_level: result.risk_level,
+            object_class: result.object_class,
+            confidence_percent: result.confidence_percent,
+            description: result.description,
+            recommendation: result.recommendation,
+            next_check: result.next_check,
+          },
+        },
+      });
+      if (error) throw error;
+      setSent(true);
+      toast({ title: "Результат отправлен на " + email });
+    } catch (e: any) {
+      console.error("Email send error:", e);
+      toast({
+        title: "Не удалось отправить",
+        description: "Email-домен ещё не настроен. Обратитесь к администратору.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return (
 
   return (
     <motion.div
